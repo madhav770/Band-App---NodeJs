@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SignUp</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+    </script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    </script>
+    <script defer type="text/javascript">
+        $(function () {
+            $("#sub").on('click', function () {
+                let name = $('#name').val()
+                let company = $('#company').val()
+                let dob = $('#dob').val()
+                let email = $('#email').val()
+                let password = $('#password').val()
+                $.post('/api/user/signup', {
+                    name: name,
+                    company: company,
+                    dob: dob,
+                    email: email,
+                    password: password
+                }, function (data) {
+                    if (data.status == 202) {
+                        $('#email-error').text('Email already taken')
+                    } else {
+                        window.location.href = "/api/user/dashboard"
+                    }
+                })
+            })
+        })
+    </script>
+</head>
+
+<body>
+
+
+    <div class="container">
+        <div class="row m-4">
+            <div class="co-xs-12">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="images/signup-img.png" alt="" class="img-responsive m-4" style="max-height: 300px;">
+            </div>
+
+            <div class="col-sm-6 ">
+                <h4>SignUp</h4>
+                <form>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" aria-describedby="emailHelp"
+                            placeholder="Enter name">
+                    </div>
+                    <div class="form-group">
+                        <label for="name">Company </label>
+                        <input type="text" class="form-control" id="company" aria-describedby="emailHelp"
+                            placeholder="Enter Company Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="dob">Date of Birth : </label>
+                        <input type="text" class="form-control" id="dob" aria-describedby="emailHelp"
+                            placeholder="yyyy-mm-dd">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" aria-describedby="emailHelp"
+                            placeholder="Enter email">
+                    </div>
+                    <small style="color:red;" id="email-error"></small>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" placeholder="Password">
+                    </div>
+
+                </form>
+                <button class="btn btn-primary" id="sub">Submit</button>
+                <br><br>
+                <a href="login.html">Already Signed? Login</a>
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+
+</html>
